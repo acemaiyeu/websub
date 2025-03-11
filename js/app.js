@@ -14,7 +14,10 @@ app.controller('HomeController', function($scope, $http, $location, $routeParams
 
     
     $scope.getVideos = function(){
-        let params = document.getElementById("search_param").value
+        let params = ""
+        if ($location.$$path == "/videos"){
+            params = document.getElementById("search_param").value
+        }
 
         $http({
             url: apiUrl + "/videos?title=" + params,
