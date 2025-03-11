@@ -1,4 +1,5 @@
-const apiUrl = "http://localhost:8888/api/client"
+// const apiUrl = "http://localhost:8888/api/client"
+const apiUrl = "https://subwebapi-production.up.railway.app/api/client"
 
 
 var app = angular.module('myApp', ['ngRoute']);

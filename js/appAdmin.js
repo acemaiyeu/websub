@@ -1,5 +1,5 @@
-const apiUrlLogin = "http://localhost:8888/api/auth/login"
-const apiUrl  = "http://localhost:8888/api/v1"
+const apiUrlLogin = "https://subwebapi-production.up.railway.app/api/auth/login"
+const apiUrl  = "https://subwebapi-production.up.railway.app/api/v1"
 var token = ""
 var appAdmin = angular.module('myApp', ['ngRoute']);
 appAdmin.controller('HomeController', function($scope) {
