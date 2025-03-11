@@ -37,7 +37,7 @@
             <tbody id="videoList">
                 <tr ng-repeat="item in videos">
                     <td>{{item.title}}</td>
-                    <td>0</td>
+                    <td>{{item.view}}</td>
                     <td>{{item.created_at}}</td>
                     <td>
                         <button class="btn btn-warning btn-sm" ng-click="editVideo(item)">Sửa</button>
