@@ -1,8 +1,14 @@
-const apiUrlLogin = "https://subwebapi-production.up.railway.app/api/auth/login"
-const apiUrl  = "https://subwebapi-production.up.railway.app/api/v1"
+const host = "https://subwebapi-production.up.railway.app"
+// const host = "http://localhost:8888"
+const apiUrlLogin = host + "/api/auth/login"
+const apiUrl  = host + "/api/v1"
+
 var token = ""
 var appAdmin = angular.module('myApp', ['ngRoute']);
-appAdmin.controller('HomeController', function($scope) {
+if(token == undefined || token == "undefined"){
+    window.location.href= "/login.html"
+}
+appAdmin.controller('HomeController', function($scope, $http) {
     $scope.init = function(){
         token = localStorage.getItem("access_token_admin")
         let time_token = localStorage.getItem('time_token_login_admin')
@@ -28,7 +34,7 @@ appAdmin.controller('HomeController', function($scope) {
     $scope.profile = function(){
         $http({
             method: 'GET',
-            url: apiUrl + "profile",
+            url: apiUrl + "/profile",
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -44,7 +50,7 @@ appAdmin.controller('HomeController', function($scope) {
         ).catch(function(error){
             console.log("Error call api profile")
             showErrorPopup(error.message)
-            if (e.data.message == "Bạn không có quyền truy cập api này"){
+            if (error.data.message == "Bạn không có quyền truy cập api này"){
                 $scope.logout()
             }
             // showErrorPopup("Tài khoản của bạn đã hết hạn đăng nhập")
@@ -111,6 +117,17 @@ appAdmin.controller('VideoController', function($scope, $http, $location) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
+        }).then(function(res){
+            alertCustom("Đã lưu thành công!")
+            
+            if ($location.$$path == "/video-create"){
+                window.location.href = "#!/videos"
+            }else{
+                $('#editModal').modal('hide');
+            }
+        }).catch(function(e){
+            console.log(e)
+            showErrorPopup(e.data.message)
         })
     }
     $scope.getVideos = function(){
@@ -167,11 +184,27 @@ appAdmin.controller('VideoController', function($scope, $http, $location) {
         }
     }
 
-    $scope.confirmDelete = function(value) {
+    $scope.confirmDelete = function(id) {
         // rowToDelete = button.closest('tr');
         // let title = rowToDelete.cells[0].innerText;
         // document.getElementById('videoToDelete').innerText = title;
+        $scope.delete_video = id
         $('#confirmDeleteModal').modal('show');
+
+    }
+    $scope.deleteById = function(){
+        $http({
+            url: apiUrl + "/video/" + $scope.delete_video,
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        }).then(function(response){
+            $scope.getVideos()
+        }).catch(function(e){
+
+        })
     }
 
 
@@ -193,6 +226,37 @@ appAdmin.controller('VideoController', function($scope, $http, $location) {
             $('#editModal').modal('hide');
         }
     }
+    $scope.addImageThumbnail = async function(){
+        // $scope.product_create.images[$scope.product_create.images.length] = (document.getElementById("add_product_image").value).replace("C:\\fakepath\\","") 
+        let files = document.getElementById("image_thumbnail").files
+        let fileNames = [];
+        // $scope.product_create.images = []
+        for (let i = 0; i < files.length; i++) {
+            // $scope.products.images[] =  $scope.uploadImage(files[i])
+            $scope.uploadImage(files[i])
+        }    
+}
+$scope.uploadImage = function(file) {
+    let formData = new FormData();
+    formData.append("image", file);
+
+    $http.post(host + "/api/client/upload-image", formData, {
+        transformRequest: angular.identity,
+        headers: { 'Content-Type': undefined }
+    }).then(function(response) {
+        // console.log("Upload thành công:", response.data);
+        // console.log("URL: " + response.data.link)
+        $scope.video.thumbnail_img = response.data.link
+        alertCustom(("Upload thành công:"))
+        console.log($scope.product_create.images)
+       return $scope.uploadedFilePath = response.data.filePath;
+       
+    }).catch(function(error) {
+        console.error("Lỗi upload ảnh:", error);
+        showErrorPopup("Lỗi upload ảnh:", error.data.message);
+    });
+};
+
 })
 function learLocal(){
     localStorage.removeItem('access_token_admin')

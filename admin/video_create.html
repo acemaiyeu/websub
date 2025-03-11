@@ -18,7 +18,11 @@
             </div>
             <div class="form-group">
                 <label for="thumbnail">Chọn file Thumbnail</label>
-                <input type="text" class="form-control-file" ng-model="video.thumbnail_img" placeholder="Nhập link thumbnail (required)" id="thumbnail">
+                <div class="input-group-append" ng-repeat="file in video.file_ass">
+                    <input type="file" class="form-control-file"  id="image_thumbnail" ng-model="video.thumbnail_img" placeholder="Nhập link thumbnail (required)" placeholder="Nhập link file"   ng-model="video.file_ass[$index]"> <br>
+                    <button class="btn btn-danger" type="button"  ng-click="addImageThumbnail()">Upload    </button> <br>
+                </div>
+            
             </div>
             <div class="form-group">
                 <label for="youtubeLink">YouTube Video Link</label>

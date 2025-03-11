@@ -1,6 +1,24 @@
 <html ng-app="myApp">
         <header>
-
+            <style>
+                .toast-container  {
+                position: fixed;
+                /* bottom: 20px; */
+                top: 0px;
+                right: 20px;
+                z-index: 1050;
+                /* background-color: green; */
+            }
+            .nav-admin ul{
+                background-color: #dc3545;
+                color: white;
+                font-weight: bold;
+            }
+            .navbar-collapse{
+                background-color: #dc3545;
+                color: whitesmoke;
+            }
+            </style>
         </header>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
@@ -17,3 +35,20 @@
         </body>
 </html>
 
+<script>
+     function alertCustom(message) {
+            var myToast = $('#customAlert');
+            myToast.find('.toast-body').text(message); // Cập nhật nội dung
+
+            myToast.toast('show'); // Hiển thị toast
+            setTimeout(() => myToast.toast('hide'), 3000); // Tự động tắt sau 3 giây
+        }
+        function showErrorPopup(message) {
+            $("#errorMessage").text(message);  // Cập nhật nội dung lỗi
+            var toast = $("#errorToast");
+            toast.toast("show");  // Hiển thị toast
+        }
+        function indexPage(){
+            window.location.href = "#!/"
+        }
+</script>

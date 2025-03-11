@@ -10,18 +10,28 @@
         }
     </style>
 <body>
-    <div class="header-image"></div>
+    <div class="header-image text-center" >
+        <img  class="w-50 text-center" src="https://yt3.googleusercontent.com/qucwdnAP3dNf4xbmYfhoFh2j_e55rbdafJ7_PdW4e4PdyIXvcjaNcIzCeM_8C0_UH0nZsi8_gFU=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="">
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container">
             <a class="navbar-brand font-weight-bold" href="#">Soa Effect Translation Aegisub</a>
         </div>
     </nav>
-    
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="input-group w-50">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">🔍 Tìm kiếm</button>
+            </div>
+        </div>
+    </div>
     <div class="container mt-4">
+        
         <div class="row">
             <div class="col-md-6 mb-4" ng-repeat="video in videos">
                 <div class="card shadow-sm p-3 video-card">
-                    <img src="{{video.thumbnail_img}}" alt="Video Thumbnail/{{video.thumbnail_img}}">
+                    <img src="https://subwebapi-production.up.railway.app/api/client/proxy-image?url={{video.thumbnail_img}}" alt="Video Thumbnail/{{video.thumbnail_img}}">
                     <h4 class="font-weight-bold mt-2">{{video.title}}</h4>
                     <!-- <p class="text-muted">Hình ảnh có thể có bản quyền. <a href="#">Tìm hiểu thêm</a></p> -->
                     <div class="d-flex justify-content-between mt-3">

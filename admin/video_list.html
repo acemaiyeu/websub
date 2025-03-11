@@ -41,7 +41,7 @@
                     <td>{{item.created_at}}</td>
                     <td>
                         <button class="btn btn-warning btn-sm" ng-click="editVideo(item)">Sửa</button>
-                        <button class="btn btn-danger btn-sm" ng-click="confirmDelete(1)">Xóa</button>
+                        <button class="btn btn-danger btn-sm" ng-click="confirmDelete(item.id)">Xóa</button>
                     </td>
                 </tr>
             </tbody>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn" ng-click="deleteById()">Xóa</button>
                 </div>
             </div>
         </div>
