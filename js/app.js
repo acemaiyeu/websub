@@ -14,8 +14,10 @@ app.controller('HomeController', function($scope, $http, $location, $routeParams
 
     
     $scope.getVideos = function(){
+        let params = document.getElementById("search_param").value
+
         $http({
-            url: apiUrl + "/videos",
+            url: apiUrl + "/videos?title" + params,
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',

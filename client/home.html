@@ -10,19 +10,12 @@
         }
     </style>
 <body>
-    <div class="header-image text-center" >
-        <img  class="w-50 text-center" src="https://yt3.googleusercontent.com/qucwdnAP3dNf4xbmYfhoFh2j_e55rbdafJ7_PdW4e4PdyIXvcjaNcIzCeM_8C0_UH0nZsi8_gFU=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="">
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand font-weight-bold" href="#">Soa Effect Translation Aegisub</a>
-        </div>
-    </nav>
     <div class="container d-flex justify-content-center align-items-center">
-        <div class="input-group w-50">
-            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
+       
+        <div class="input-group w-50" style="margin-top: 10px;">
+            <input type="text" class="form-control" id="search_param" placeholder="Nhập từ khóa tìm kiếm...">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button">🔍 Tìm kiếm</button>
+                <button class="btn btn-primary" type="button" ng-click="getVideos()">🔍 Tìm kiếm</button>
             </div>
         </div>
     </div>
