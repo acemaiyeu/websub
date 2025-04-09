@@ -20,7 +20,7 @@ app.controller('HomeController', function($scope, $http, $location, $routeParams
         }
 
         $http({
-            url: apiUrl + "/videos?title=" + params,
+            url: apiUrl + "/videos?limit=1000&title=" + params,
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
